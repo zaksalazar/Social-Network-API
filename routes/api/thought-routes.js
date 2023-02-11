@@ -13,16 +13,26 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   Thought.create({
     thoughtText:req.body.thoughtText,
-    userName:req.body.userName,
+    username:req.body.username,
   }, (err, thought) => {
+    if (err) {
+      res.status(500).json(err)
+    } else {
     res.status(200).json(true)
+    }
   })
 });
 
 //TODO: ROUTE TO GET SINGLE THOUGHT BASED ON THOUGHT ID
-router.get("/:thoughtId", (req, res) => {
-  Thought.findById({}, (err, thoughts) => {
-    res.status(200).json(thoughts); 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+
+  Thought.findById(id, (err, thought) => { 
+    if (err) {
+      res.status(500).json(err)
+    } else {
+    res.status(200).json(thought)
+    }
   })
 });
 

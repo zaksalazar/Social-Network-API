@@ -11,7 +11,7 @@ router.get('/', (req,res)=> {
 
 //TODO - ROUTE THAT CREATES A NEW USER
 router.post('/', (req,res)=> {
-  user.create({
+  User.create({
     username:req.body.username,
     email:req.body.email
   }, (err, user) => {
@@ -22,8 +22,14 @@ router.post('/', (req,res)=> {
 
 //TODO - ROUTE THAT GETS A SINGLE USER BASED ON USER ID
 router.get('/:userId', (req,res) => {
+  User.findById({userId
+  },
+    (err, user) => {
+    }, res.status(200).json(true)
+  )
+    });
 
-})
+
 
 //TODO - ROUTE THAT UPDATES A SINGLE USER
 router.put('/:userId', (req,res)=> {
