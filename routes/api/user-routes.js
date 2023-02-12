@@ -23,12 +23,13 @@ router.post('/', (req,res)=> {
 
 //TODO - ROUTE THAT GETS A SINGLE USER BASED ON USER ID
 router.get('/:userId', (req,res) => {
-  const id = req.params.id;
-  User.findById(id, (err, thought) => {
+  const id = req.params.userId;
+  User.findById(id, (err, user) => {
     if (err) {
       res.status(500).json(err);
+      console.log(err);
     } else {
-      res.status(200).json(thought);
+      res.status(200).json(user);
     }
   });
 });
