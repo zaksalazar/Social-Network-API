@@ -9,38 +9,66 @@ router.get("/", (req, res) => {
 });
 
 //TODO: ROUTE TO CREATE A NEW THOUGHT
-//this is a test// 
+//this is a test//
 router.post("/", (req, res) => {
-  Thought.create({
-    thoughtText:req.body.thoughtText,
-    username:req.body.username,
-  }, (err, thought) => {
-    if (err) {
-      res.status(500).json(err)
-    } else {
-    res.status(200).json(true)
+  Thought.create(
+    {
+      thoughtText: req.body.thoughtText,
+      username: req.body.username,
+    },
+    (err, thought) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(true);
+      }
     }
-  })
+  );
 });
 
 //TODO: ROUTE TO GET SINGLE THOUGHT BASED ON THOUGHT ID
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
-  Thought.findById(id, (err, thought) => { 
+  Thought.findById(id, (err, thought) => {
     if (err) {
-      res.status(500).json(err)
+      res.status(500).json(err);
     } else {
-    res.status(200).json(thought)
+      res.status(200).json(thought);
     }
-  })
+  });
 });
 
 //TODO: ROUTE TO UPDATE A THOUGHT
-router.put("/", (req, res) => {});
+router.put("/:id", (req, res) => {
+  const id = req.params.id;
+  Thought.findByIdAndUpdate(
+    {
+      thoughtText: req.body.thoughtText,
+      username: req.body.username,
+    },
+    (err, thought) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(true);
+      }
+    }
+    
+  )
+});
 
 //TODO: ROUTE TO DELETE A THOUGHT BASED ON THOUGHT ID
-router.delete("/:thoughtId", (req, res) => {});
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  Thought.findByIdAndDelete(id, (err, thought) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json('Thought Deleted');
+    }
+  });
+});
 
 //TODO: ROUTE TO ADD REACTION TO A THOUGHT
 router.post("/:thoughtId/reactions", (req, res) => {});
