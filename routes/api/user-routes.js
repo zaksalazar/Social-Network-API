@@ -37,7 +37,7 @@ router.get('/:userId', (req,res) => {
 
 //TODO - ROUTE THAT UPDATES A SINGLE USER
 router.put('/:userId', (req,res)=> {
-  const id = req.params.id;
+  const id = req.params.userId;
   User.findByIdAndUpdate(
     {
       username: req.body.username,
@@ -56,7 +56,7 @@ router.put('/:userId', (req,res)=> {
 
 //TODO - ROUTE THAT DELETES A SINGLE USER BASED ON USER ID
 router.delete('/:userId', (req,res)=> {
-  const id = req.params.id;
+  const id = req.params.userId;
   User.findByIdAndDelete(id, (err, user) => {
     if (err) {
       res.status(500).json(err);

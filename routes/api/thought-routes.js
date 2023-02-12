@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { request } = require("express");
 const { Thought, Reaction } = require("../../models");
 
 //TODO: ROUTE TO GET ALL THOUGHTS
@@ -54,8 +55,7 @@ router.put("/:id", (req, res) => {
         res.status(200).json(true);
       }
     }
-    
-  )
+  );
 });
 
 //TODO: ROUTE TO DELETE A THOUGHT BASED ON THOUGHT ID
@@ -65,13 +65,27 @@ router.delete("/:id", (req, res) => {
     if (err) {
       res.status(500).json(err);
     } else {
-      res.status(200).json('Thought Deleted');
+      res.status(200).json("Thought Deleted");
     }
   });
 });
 
 //TODO: ROUTE TO ADD REACTION TO A THOUGHT
-router.post("/:thoughtId/reactions", (req, res) => {});
+router.post("/:thoughtId/reactions", (req, res) => {
+  const id = req.params.thoughtId;
+  Thought.findById(id, (err, thought) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(thought);
+      Reaction.create({
+        $push: { "thought.reactions": "req.body.reactionBody",
+        "thought.reactions.username":"req.body.username"
+       },
+      });
+    }
+  });
+});
 
 //TODO: ROUTE TO DELETE A REACTION ON A THOUGHT
 router.delete("/:thoughtId/reactions/:reactionId", (req, res) => {});
