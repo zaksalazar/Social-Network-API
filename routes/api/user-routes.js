@@ -67,9 +67,20 @@ router.delete('/:userId', (req,res)=> {
 });
 
 //TODO - ROUTE THAT ADDS A FRIEND TO A USER
-router.put('/:userId/friends/:friendId', (req,res)=> {
-
-})
+router.post('/:userId/friends/:friendId', (req,res)=> {
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $addToSet: { friends: req.body.id } },
+    { runValidators: true, new: true }
+  )
+    .then((thoughts) =>
+      !thoughts
+        ? res.status(404).json({ message: 'No user with this id!' })
+        : res.json(thoughts)
+    )
+    .catch((err) => res.status(500).json(err));
+},
+)
 
 //TODO - ROUTE THAT DELETES A FRIEND FROM A USER'S FRIENDS, DONT DELETE THE FRIEND AS A USER THOUGH!
 router.delete('/:userId/friends/:friendId', (req,res)=> {
