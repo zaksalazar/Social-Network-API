@@ -79,7 +79,7 @@ router.post("/:thoughtId/reactions", (req, res) => {
     } else {
       res.status(200).json(thought);
       Reaction.create({
-        $push: { "thought.reactions": "req.body.reactionBody",
+        $push: { "thought.reactions.reactionBody": "req.body.reactionBody",
         "thought.reactions.username":"req.body.username"
        },
       });
