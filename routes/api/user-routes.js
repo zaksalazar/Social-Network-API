@@ -36,23 +36,19 @@ router.get('/:userId', (req,res) => {
 
 
 //TODO - ROUTE THAT UPDATES A SINGLE USER
-router.put('/:userId', (req,res)=> {
-  const id = req.params.userId;
-  User.findByIdAndUpdate(
-    {
-      username: req.body.username,
-      email:req.body.email
-    },
-    (err, user) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(200).json(user);
-      }
-    }
-    
+router.put("/:userId", (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $set: req.body },
+    { runValidators: true, new: true }
   )
-});
+    .then((user) =>
+      !user
+        ? res.status(404).json({ message: "No user with this id!" })
+        : res.json(user)
+    )
+    .catch((err) => res.status(500).json(err));
+  });
 
 //TODO - ROUTE THAT DELETES A SINGLE USER BASED ON USER ID
 router.delete('/:userId', (req,res)=> {
