@@ -4,7 +4,7 @@
 [User_Story](#userstory)<br>
 [Getting_Started](#getting_started)<br>
 [Summary](#summary)<br>
-[Demp_Video](#demo_video)<br>
+[Demo_Video](#demo_video)<br>
 [Git_Hub_Repo](#git-hub-repo)
 
 
