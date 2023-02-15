@@ -23,8 +23,9 @@ run 'npm i' in the command line, followed by 'node server' to open the applicati
 This backend social network api tests CRUD routes for "thoughts" and "users". 
 
 ## Demo Video 
-
+https://drive.google.com/file/d/1bZsI9Exq67zMTv1HqvJYgd0xrCcUf7tO/view?usp=sharing
 
 
 ## Git Hub Repo 
+https://github.com/zaksalazar/social-network-api
 
